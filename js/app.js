@@ -7,6 +7,9 @@ const inputCost = document.getElementById('cost');
 const inputGetPaid = document.getElementById('getPaid');
 const inputGiveChange = document.getElementById('giveChange');
 const inputCalculateButton = document.getElementById('calculate');
+const paperBillsChange = document.getElementById('paperBill');
+const coinChange = document.getElementById('coinBill');
+
 let paperCount = [0, 0, 0, 0, 0, 0];
 let coinCount = [0, 0, 0, 0, 0];
 // functions
@@ -22,30 +25,33 @@ const divideClientAmount = () => {
   for (let i = PAPERBILL.length - 1; i >= 0; i--) {
     while (change / PAPERBILL[i] >= 1) {
       change = change - PAPERBILL[i];
-      console.log(
-        ' billete con el que devolvi ' +
-          PAPERBILL[i] +
-          ' cambio que me queda ' +
-          change
-      );
       paperCount[i]++;
     }
   }
   for (let i = COINS.length - 1; i >= 0; i--) {
     while (change / COINS[i] >= 1) {
       change = change - COINS[i];
-      console.log(
-        ' moneda con el que devolvi ' +
-          COINS[i] +
-          ' cambio que me queda ' +
-          change
-      );
       coinCount[i]++;
     }
   }
 
-  console.log('Posicion y cantidad de PAPERBILL usados ' + paperCount);
-  console.log('Posicion y cantidad de COINS usadas ' + coinCount);
+  for (let j = 0; j < paperCount.length; j++) {
+    if (paperCount[j] !== 0) {
+      paperBillsChange.innerHTML +=
+        ' ' + PAPERBILL[j] + ' Euros' + ' x ' + paperCount[j] + ', ';
+    } else {
+      console.log('nada');
+    }
+  }
+
+  for (let k = 0; k < coinCount.length; k++) {
+    if (coinCount[k] !== 0) {
+      coinChange.innerHTML +=
+        ' ' + COINS[k] + ' Centimos' + ' x ' + coinCount[k] + ', ';
+    } else {
+      console.log('nada');
+    }
+  }
 };
 
 // handle functions
